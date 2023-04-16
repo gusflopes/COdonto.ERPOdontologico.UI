@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+type PageComponent = typeof import('./pages/Home');
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+const pages = import.meta.glob('./pages/**/*.tsx', {eager: true}) as Record<string, PageComponent>;
+
+const routes: RouteObject[] = [];
+for (const path in pages) {
+  const page = pages[path];
+  const route: RouteObject = {
+    path: path.replace('./pages', '').replace('.tsx', ''),
+    element: React.createElement(page.default),
+  };
+  routes.push(route);
 }
 
-export default App
+const router = createBrowserRouter(
+  routes.map((route) => ({  
+    path: route.path,
+    element: route.element,
+  }))
+);
+
+export default function App() {
+  return <RouterProvider router={router} />;
+}
