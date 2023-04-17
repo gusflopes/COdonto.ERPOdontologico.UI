@@ -1,29 +1,12 @@
-import axios from 'axios'
+import axios from 'axios';
+import { getToken } from './useToken';
 
   const api = axios.create({
     baseURL: 'https://localhost:7279',
   })
 
-  const saveToken = (token: string) => {
-    localStorage.setItem('@token', token)
-  }
+  // const {} = AuthProvider;
 
-  const getToken = () => {
-    const token = localStorage.getItem('@token')
-    return token
-  }
-
-  const saveUser = (user: any) => {
-    localStorage.setItem('@user', JSON.stringify(user))
-  }
-
-  const getUser = () => {
-    const user = localStorage.getItem('@user')
-    if (user) {
-      return JSON.parse(user)
-    }
-    return null
-  }
 
   api.interceptors.request.use(async requestConfig => {
     const token = getToken()
@@ -65,7 +48,7 @@ import axios from 'axios'
     
     signin: async (email: string, senha: string) => {
       const response = await api.post("/auth/signin", { email, senha });
-  
+      response.data.
       saveToken(response.data.token);
 
       return {

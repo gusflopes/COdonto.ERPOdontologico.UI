@@ -1,11 +1,12 @@
 "use client";
 import { createContext, useState } from "react";
+import { useApi } from "../hooks/useApi";
 
 interface AuthContextProps {
   token: string | null;
   login: (token: string) => void;
   logout: () => void;
-  // checkToken: () => string | null;
+  checkToken: () => string | null;
 }
 
 interface AuthProviderProps {
@@ -16,7 +17,7 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(checkToken);
-  // const {signin, signup} = useApi();
+  const { signin, signup } = useApi();
 
   function login(token: string) {
     if (!token) return;
@@ -39,7 +40,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   return (
-    <AuthContext.Provider value={{ token, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        token,
+        login,
+        logout,
+        checkToken,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
