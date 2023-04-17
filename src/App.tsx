@@ -10,18 +10,20 @@ const routes: RouteObject[] = [];
 for (const path in pages) {
   const page = pages[path];
 
-  // obtém o nome da pasta ou do arquivo
-  const fileName = path.split('/').pop()!;
-  const name = fileName.endsWith('index.tsx')
-    ? path.split('/').slice(-2, -1)[0]
-    : fileName.replace('.tsx', '');
+  // obtém o nome completo da rota a partir do diretório "pages"
+  const routePath = path
+    .replace('./pages/', '') // remove o diretório "pages"
+    .replace('/index.tsx', '') // remove o nome do arquivo
+    .split('/') // divide o caminho em partes
+    .filter(Boolean) // remove partes vazias
+    .join('/'); // junta as partes restantes com "/"
 
   const route: RouteObject = {
-    path: `/${name}`,
+    path: `/${routePath}`,
     element: React.createElement(page.default),
   };
 
-  if (route.path === '/pages') {
+  if (route.path === '/index.tsx') {
     route.path = '/';
   }
 
