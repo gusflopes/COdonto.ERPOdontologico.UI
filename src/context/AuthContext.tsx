@@ -1,5 +1,5 @@
-'use client'
-import { createContext, useState } from 'react';
+"use client";
+import { createContext, useState } from "react";
 
 interface AuthContextProps {
   token: string | null;
@@ -9,38 +9,38 @@ interface AuthContextProps {
 }
 
 interface AuthProviderProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export const AuthContext = createContext({} as AuthContextProps)
+export const AuthContext = createContext({} as AuthContextProps);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [token, setToken] = useState<string | null>(checkToken)
+  const [token, setToken] = useState<string | null>(checkToken);
   // const {signin, signup} = useApi();
 
   function login(token: string) {
-    if (!token) return
-    localStorage.setItem('token', token)
-    return setToken(token)
+    if (!token) return;
+    localStorage.setItem("token", token);
+    return setToken(token);
   }
 
   function logout() {
-    localStorage.removeItem('token')
-    setToken(null)
-    return window.location.href = '/'
+    localStorage.removeItem("token");
+    setToken(null);
+    return (window.location.href = "/");
   }
 
   function checkToken() {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token')
-      return token
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      return token;
     }
-    return null
+    return null;
   }
 
   return (
     <AuthContext.Provider value={{ token, login, logout }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};

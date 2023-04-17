@@ -1,22 +1,23 @@
+"use server";
 
-import { useContext, useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import Header from '../../components/layout/Header'
-import NavBar from '../../components/layout/NavBar'
-import { AuthContext } from '../../context/AuthContext'
+import { useContext, useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import Header from "../../components/layout/Header";
+import NavBar from "../../components/layout/NavBar";
+import { AuthContext } from "../../context/AuthContext";
 
 function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-export default function Dashboard({ children}: any) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const {login, logout, token} = useContext(AuthContext)
+export default function Dashboard({ children }: any) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { login, logout, token } = useContext(AuthContext);
   useEffect(() => {
     if (!token) {
-      logout()
+      logout();
     }
-  }, [])
+  }, []);
 
   return (
     <>
@@ -30,7 +31,7 @@ export default function Dashboard({ children}: any) {
 
           <main className="xl:pl-96">
             <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
-               <Outlet />
+              <Outlet />
             </div>
           </main>
         </div>
@@ -40,5 +41,5 @@ export default function Dashboard({ children}: any) {
         </aside>
       </div>
     </>
-  )
+  );
 }
