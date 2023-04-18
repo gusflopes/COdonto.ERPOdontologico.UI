@@ -12,7 +12,7 @@ function classNames(...classes: any[]) {
 
 export default function Dashboard({ children }: any) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { login, logout, token } = useContext(AuthContext);
+  const { logout, token } = useContext(AuthContext);
   useEffect(() => {
     if (!token) {
       logout();

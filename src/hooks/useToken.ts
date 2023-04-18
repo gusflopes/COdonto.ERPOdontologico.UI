@@ -1,9 +1,9 @@
 export const saveToken = (token: string) => {
-  localStorage.setItem("@token", token);
+  localStorage.setItem("token", token);
 };
 
 export const getToken = () => {
-  const token = localStorage.getItem("@token");
+  const token = localStorage.getItem("token");
   return token;
 };
 

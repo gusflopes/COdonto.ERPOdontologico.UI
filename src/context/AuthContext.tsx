@@ -4,7 +4,7 @@ import { useApi } from "../hooks/useApi";
 
 interface AuthContextProps {
   token: string | null;
-  login: (token: string) => void;
+  isAuthenticated: (token: string) => void;
   logout: () => void;
   checkToken: () => string | null;
 }
@@ -19,10 +19,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(checkToken);
   const { signin, signup } = useApi();
 
-  function login(token: string) {
+  function isAuthenticated(token: string) {
     if (!token) return;
     localStorage.setItem("token", token);
-    return setToken(token);
+    setToken(token);
+    return (window.location.href = "/dashboard");
   }
 
   function logout() {
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     <AuthContext.Provider
       value={{
         token,
-        login,
+        isAuthenticated,
         logout,
         checkToken,
       }}

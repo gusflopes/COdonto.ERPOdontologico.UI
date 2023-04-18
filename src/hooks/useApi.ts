@@ -1,8 +1,8 @@
 import axios from "axios";
-import { getToken } from "./useToken";
+import { getToken, saveToken } from "./useToken";
 
 const api = axios.create({
-  baseURL: "https://localhost:7279",
+  baseURL: "https://localhost:7279/api",
 });
 
 // const {} = AuthProvider;
@@ -10,7 +10,7 @@ const api = axios.create({
 api.interceptors.request.use(async (requestConfig) => {
   const token = getToken();
   if (token) {
-    requestConfig.baseURL = `${requestConfig.baseURL}/api`;
+    // requestConfig.baseURL = `${requestConfig.baseURL}/api`;
     requestConfig.headers.Authorization = `Bearer ${token}`;
   }
   return requestConfig;
@@ -20,11 +20,10 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status === 401) {
-      localStorage.removeItem("@token");
+      localStorage.removeItem("token");
       setTimeout(() => {
         window.location.href = "/";
       }, 10);
-      window.location.href = "/";
     }
     if (error.response.status === 400) {
       if (typeof error.response.data === "string") {
@@ -49,7 +48,7 @@ export const useApi = () => ({
 
   signin: async (email: string, senha: string) => {
     const response = await api.post("/auth/signin", { email, senha });
-    response.data.saveToken(response.data.token);
+    saveToken(response.data.token);
 
     return {
       usuario: {

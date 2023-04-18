@@ -4,11 +4,11 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 
 export default function Home() {
-  const { login } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleAuth = () => {
-    login("token");
+    isAuthenticated("token");
     setTimeout(() => {
       navigate("/dashboard");
     }, 350);
@@ -17,8 +17,10 @@ export default function Home() {
   return (
     <>
       <h1>HOME!</h1>
-      <button onClick={handleAuth}>LOGIN</button>
-
+      <button onClick={handleAuth}>AUTHENTICATE</button>
+      <br />
+      <a href="/auth/login">LOGIN</a>
+      <br />
       <button onClick={() => toast.error("SUCESSO!")}>TOAST!</button>
     </>
   );
