@@ -113,8 +113,8 @@ export default function NavBar(props: NavBarProps) {
                             className={classNames(
                               item.current
                                 ? "bg-gray-800 text-white"
-                                : "text-gray-400 hover:text-white hover:bg-gray-800",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                : "text-gray-400 hover:bg-gray-800 hover:text-white",
+                              "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                             )}
                           >
                             <item.icon
@@ -152,8 +152,8 @@ export default function NavBar(props: NavBarProps) {
                   className={classNames(
                     item.current
                       ? "bg-gray-800 text-white"
-                      : "text-gray-400 hover:text-white hover:bg-gray-800",
-                    "group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold"
+                      : "text-gray-400 hover:bg-gray-800 hover:text-white",
+                    "group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-6"
                   )}
                 >
                   <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />

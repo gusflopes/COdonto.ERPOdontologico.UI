@@ -26,25 +26,25 @@ const Login: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex items-stretch h-screen">
-        <div className="flex flex-col justify-center w-full max-w-screen-sm">
-          <div className="flex flex-col items-center justify-center animate-appear-from-left">
+      <div className="flex h-screen items-stretch">
+        <div className="flex w-full max-w-screen-sm flex-col justify-center">
+          <div className="flex animate-appear-from-left flex-col items-center justify-center">
             <img src={"/images/hublaw-logo.png"} className="h-auto max-w-xs" />
-            <div className="flex flex-col justify-center w-64 mt-8">
-              <label className="text-base mt-4 mb-1">Digite seu e-mail</label>
+            <div className="mt-8 flex w-64 flex-col justify-center">
+              <label className="mb-1 mt-4 text-base">Digite seu e-mail</label>
               <input
-                className="text-base p-1 rounded-md border-2 active:border-red-600 "
+                className="rounded-md border-2 p-1 text-base active:border-red-600 "
                 {...register("Email")}
               />
-              <label className="text-base mt-4 mb-1">Digite sua senha</label>
+              <label className="mb-1 mt-4 text-base">Digite sua senha</label>
               <input
-                className="text-base p-1 rounded-md border-2 active:border-red-600 "
+                className="rounded-md border-2 p-1 text-base active:border-red-600 "
                 {...register("Senha")}
               />
 
               <button
                 type="submit"
-                className="mt-6 bg-green-300 flex-1 w-64 text-lg hover:bg-green-400 pt-3 pb-3 rounded-md font-bold"
+                className="mt-6 w-64 flex-1 rounded-md bg-green-300 pb-3 pt-3 text-lg font-bold hover:bg-green-400"
               >
                 ENTRAR
               </button>
@@ -56,7 +56,7 @@ const Login: React.FC = () => {
           </div>
         </div>
         <div
-          className="flex-1 bg-cover bg-no-repeat bg-center hidden md:block"
+          className="hidden flex-1 bg-cover bg-center bg-no-repeat md:block"
           style={{
             backgroundImage: `url(${loginBackground})`,
           }}

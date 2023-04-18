@@ -30,7 +30,7 @@ export default function Dashboard({ children }: any) {
           {/* FINAL */}
 
           <main className="xl:pl-96">
-            <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+            <div className="px-4 py-10 sm:px-6  lg:px-8 lg:py-6">
               <Outlet />
             </div>
           </main>
