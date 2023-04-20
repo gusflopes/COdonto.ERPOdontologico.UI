@@ -5,8 +5,6 @@ const api = axios.create({
   baseURL: "https://localhost:7279/api",
 });
 
-// const {} = AuthProvider;
-
 api.interceptors.request.use(async (requestConfig) => {
   const token = getToken();
   if (token) {
