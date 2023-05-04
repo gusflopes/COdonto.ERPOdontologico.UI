@@ -1,7 +1,11 @@
 import axios from "axios";
-import { getToken, saveToken } from "./useToken";
+import { getToken } from "../useToken";
 
-const api = axios.create({
+import * as auth from "./auth";
+import * as dentistas from "./dentistas";
+import * as pacientes from "./pacientes";
+
+export const api = axios.create({
   baseURL: "https://localhost:7279/api",
 });
 
@@ -38,25 +42,7 @@ api.interceptors.response.use(
 );
 
 export const useApi = () => ({
-  ValidateToken: async (token: string) => {},
-
-  signup: async (nome: string, email: string, senha: string) => {
-    await api.post("/auth/signup", { nome, email, senha });
-  },
-
-  signin: async (email: string, senha: string) => {
-    const response = await api.post("/auth/signin", { email, senha });
-    saveToken(response.data.token);
-
-    return {
-      usuario: {
-        id: response.data.usuario.id,
-        nome: response.data.usuario.nome,
-        email: response.data.usuario.email,
-        avatarUrl: response.data.usuario.avatarUrl,
-      },
-      token: response.data.token,
-      expiration: response.data.expiration,
-    };
-  },
+  ...dentistas,
+  ...pacientes,
+  ...auth,
 });
