@@ -22,4 +22,4 @@ export const authSignin = async (email: string, senha: string) => {
     token: response.data.token,
     expiration: response.data.expiration,
   };
-},
+};

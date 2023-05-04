@@ -17,7 +17,7 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(checkToken);
-  const { signin, signup } = useApi();
+  const { authSignin, authSignup } = useApi();
 
   function isAuthenticated(token: string) {
     if (!token) return;

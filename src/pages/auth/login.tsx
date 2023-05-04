@@ -14,7 +14,7 @@ type FormData = {
 };
 
 const Login: React.FC = () => {
-  const { signin } = useApi();
+  const { authSignin } = useApi();
   const { isAuthenticated } = useContext(AuthContext);
   const {
     register,
@@ -25,7 +25,7 @@ const Login: React.FC = () => {
   const onSubmit = async (data: any) => {
     console.log(data);
     try {
-      const response = await signin(data.Email, data.Senha);
+      const response = await authSignin(data.Email, data.Senha);
       if (response) {
         console.log(response);
         toast.success("Logado com sucesso!");
